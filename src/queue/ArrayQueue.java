@@ -13,11 +13,9 @@ public class ArrayQueue extends AbstractQueue {
         s.enqueue(15);
         s.dequeue();
         s.dequeue();
-        s.enqueue(20);
-        s.clear();
     }
 
-    private void smartArray(char ch) {
+    /*private void smartArray(char ch) {
         if (ch == '+') {
             if (tail == elements.length) {
                 Object[] temp = new Object[elements.length + 1];
@@ -29,14 +27,18 @@ public class ArrayQueue extends AbstractQueue {
             Object[] temp = new Object[elements.length - 1];
             System.arraycopy(elements, 1, temp, 0, elements.length - 1);
             elements = temp;
-            //head = 0;
+            head = 0;
             tail--;
         }
-    }
+    }*/
 
     @Override
     public void enqueue(Object object) {
-        smartArray('+');
+        if (tail == elements.length) {
+            Object[] temp = new Object[elements.length + 1];
+            System.arraycopy(elements, 0, temp, 0, elements.length);
+            elements = temp;
+        }
 
         if (tail != elements.length) {
             elements[tail] = object;
@@ -58,8 +60,8 @@ public class ArrayQueue extends AbstractQueue {
         }
         Object obj = elements[head];
         elements[head] = null;
-        //head = (head + 1);
-        smartArray('-');
+        head = (head + 1);
+        //smartArray('-');
         size--;
         return obj;
     }
@@ -76,8 +78,7 @@ public class ArrayQueue extends AbstractQueue {
 
     @Override
     public void clear() {
-        //head = 0;
-        elements = new Object[0];
+        head = 0;
         tail = 0;
         size = 0;
     }
