@@ -1,6 +1,8 @@
 package queue;
 
 public abstract class AbstractQueue implements Queue {
+    private  int size = 0;
+
     @Override
     public abstract void enqueue(Object object);
 
@@ -11,10 +13,14 @@ public abstract class AbstractQueue implements Queue {
     public abstract Object dequeue();
 
     @Override
-    public abstract int size();
+    public int size() {
+        return size;
+    };
 
     @Override
-    public abstract boolean isEmpty();
+    public boolean isEmpty() {
+        return size == 0;
+    };
 
     @Override
     public abstract void clear();
